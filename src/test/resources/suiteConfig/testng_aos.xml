@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="tests" thread-count="1">
+
+    <test verbose="2" preserve-order="true" name="Google Nexus">
+        <parameter name="environment" value="test"/>
+        <!--<parameter name="environment" value="produce"/>-->
+        <parameter name="serverURL" value="http://127.0.0.1:4723/wd/hub"/>
+        <parameter name="automationName" value="UiAutomator2"/>
+        <parameter name="platformName" value="ANDROID"/>
+        <parameter name="platformVersion" value="7.0"/>
+        <!--<parameter name="platformVersion" value="6.0"/>-->
+        <!--<parameter name="deviceName" value="Samsung Galaxy"/>-->
+        <parameter name="deviceName" value="Google Nexus"/>
+        <parameter name="appPackage" value="com.tnaot.news"/>
+        <parameter name="appActivity" value=".mctnews.detail.activity.MainActivity"/>
+        <parameter name="androidAppPath" value="src/main/resources/news_v3.1.0_google_preview_20190825.apk"/>
+        <parameter name="elementTimeOut" value="10"/>
+        <classes>
+            <class name="com.mengxun.tnaot.demo.RunCukesTest"/>
+        </classes>
+    </test>
+
+
+    <!--用例失败重跑机制-->
+    <listeners>
+        <!--失败重试-->
+        <listener class-name="com.mengxun.tnaot.cucumber.listener.TestRunnerListener" />
+        <!--<listener class-name="com.mengxun.tnaot.cucumber.listener.RetryListener"/>-->
+
+        <!-- 控制TestCase执行顺序 -->
+        <!--<listener class-name="com.tnaot.utils.listener.TestCaseInterceptor"/>-->
+
+        <!--生成extent report-->
+        <!--<listener class-name="com.cucumber.listener.ExtentCucumberFormatter" />-->
+        <listener class-name="com.mengxun.tnaot.cucumber.listener.ExtentTestNGIReporterListener" />
+
+    </listeners>
+
+</suite>
